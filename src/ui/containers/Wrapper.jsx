@@ -23,7 +23,7 @@ function Wrapper() {
     const addItem = ({id, description}) => {
         const newItems = [...items, {id, description}];
         dispatch(setItem(newItems))
-        // localStorage.setItem('items', JSON.stringify(newItems))
+        localStorage.setItem('items', JSON.stringify(newItems))
     }
 
     return (
