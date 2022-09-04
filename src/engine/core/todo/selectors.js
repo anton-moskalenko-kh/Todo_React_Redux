@@ -1,3 +1,3 @@
 export const selectors = {
-    items: (state) => state.todo.items
+    items: (state) => state.todo.items,
 }

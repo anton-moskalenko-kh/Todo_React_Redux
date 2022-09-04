@@ -2,7 +2,6 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     items: [],
-    loading: false
 }
 
 const todo = createSlice({

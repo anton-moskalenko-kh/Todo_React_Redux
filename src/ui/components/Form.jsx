@@ -4,12 +4,17 @@ import {Form, Field} from "react-final-form";
 //Material UI
 import Input from "./Form/Input";
 import ItemButton from "./Button";
+import {useDispatch, useSelector} from "react-redux";
+import {addItem} from "../../engine/core/todo/thunks";
+import {selectors} from "../../engine/core/todo/selectors";
 
-function MainForm(props) {
-    const {onAdd} = props;
+function MainForm() {
+
+    const dispatch = useDispatch()
+    const items = useSelector(selectors.items)
 
     const handleItem = (event) => {
-        onAdd({id: v4(), description: event.description})
+        dispatch(addItem({id: v4(), description: event.description, items}))
         event.description = ''
     }
 
