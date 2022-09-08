@@ -3,30 +3,35 @@ import {useDispatch, useSelector} from "react-redux";
 import ErrorBoundary from "./ErrorBoundary";
 
 //Core
-import {selectors} from "../../engine/core/todo/selectors";
+import Selector from "../../engine/core/todo/selectors";
 import {getItems} from "../../engine/core/todo/thunks";
 
 // Components
-import MainForm from "../components/Form";
-import Item from "../components/Item";
-import Footer from "../components/Footer";
-import {setItem} from "../../engine/core/todo/slice";
+import MainForm from "../components/Form/Form";
+import Item from "../components/Item/Item";
+import Footer from "../components/Footer/Footer";
+import Search from "../components/Search";
+import {setSearch} from "../../engine/core/todo/slice";
 
 function Wrapper() {
     const dispatch = useDispatch()
-    const items = useSelector(selectors.items)
+    const memoItems = useSelector(Selector.memoItems)
 
     useEffect(() => {
         dispatch(getItems())
     }, [dispatch])
 
+    const handleChange = (e) => {
+        dispatch(setSearch(e.target.value))
+    }
+
     return (
         <ErrorBoundary>
             <div className="container">
                 <MainForm />
-                <h2>Your Tasks:</h2>
+                <Search onChange={handleChange} />
                 <div className="todos-wrapper">
-                    {items.map(item => <Item key={item.id}
+                    {memoItems?.map(item => <Item key={item.id}
                                              checked={item.checked}
                                              id={item.id}
                                              description={item.description}
