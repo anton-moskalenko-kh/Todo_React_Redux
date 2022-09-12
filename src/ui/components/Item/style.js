@@ -18,11 +18,7 @@ export const useStyle = createUseStyles({
         "alignSelf": "center",
         "margin": "0 0 0 10px"
     },
-    descUnderline: {
-        "textDecoration": "line-through"
+    descChecked: {
+        "opacity": "0.3"
     }
 })
-
-export const buttonStyle = {
-    margin: '0 6px 0 0'
-}

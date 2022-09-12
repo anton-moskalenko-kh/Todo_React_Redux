@@ -6,9 +6,11 @@ import Selectors from "../../../engine/core/todo/selectors";
 
 //Parts
 import ItemButton from "../Button/Button";
+import {DeleteForever, Edit} from "@mui/icons-material";
 
 //Style
-import {useStyle, buttonStyle} from "./style";
+import {useStyle} from "./style";
+import classNames from "classnames";
 
 function Item(props) {
     const {description, id, checked} = props
@@ -18,8 +20,7 @@ function Item(props) {
     const items = useSelector(Selectors.memoItems)
     const classes = useStyle()
 
-    const checkboxChecked = checked ? classes.descUnderline : '';
-    const todoClassName = [classes.desc, checkboxChecked]
+    const checkboxChecked = checked ? classes.descChecked : '';
 
     const onChecked = (event) => {
         dispatch(handleChecked(id, event.target.checked, items))
@@ -51,9 +52,9 @@ function Item(props) {
                     </div>
                     :
                     <>
-                        <p className={todoClassName.join(' ')}>{description}</p>
-                        <ItemButton sx={{...buttonStyle}} click={editItem} varient='outlined' text="Edit"/>
-                        <ItemButton click={removeItem} varient='outlined' text="Delete"/>
+                        <p className={classNames(classes.desc, checkboxChecked)}>{description}</p>
+                        <Edit color='primary' fontSize='large' cursor="pointer"  onClick={editItem} />
+                        <DeleteForever color='primary' fontSize='large' cursor="pointer" onClick={removeItem} />
                     </>
                 }
             </label>

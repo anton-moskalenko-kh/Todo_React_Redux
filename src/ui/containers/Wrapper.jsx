@@ -13,6 +13,9 @@ import Footer from "../components/Footer/Footer";
 import Search from "../components/Search";
 import {setSearch} from "../../engine/core/todo/slice";
 
+//Style
+import {TransitionGroup, CSSTransition} from "react-transition-group";
+
 function Wrapper() {
     const dispatch = useDispatch()
     const memoItems = useSelector(Selector.memoItems)
@@ -30,14 +33,20 @@ function Wrapper() {
             <div className="container">
                 <MainForm />
                 <Search onChange={handleChange} />
-                <div className="todos-wrapper">
-                    {memoItems?.map(item => <Item key={item.id}
-                                             checked={item.checked}
-                                             id={item.id}
-                                             description={item.description}
-                        />
-                    )}
-                </div>
+                <TransitionGroup component='ul' className="todos-wrapper">
+                    {memoItems?.map(item => (
+                        <CSSTransition
+                            key={item.id}
+                            classNames='todos'
+                            timeout={1000}
+                        >
+                            <Item checked={item.checked}
+                                  id={item.id}
+                                  description={item.description}
+                            />
+                        </CSSTransition>
+                        ))}
+                </TransitionGroup>
                 <Footer/>
             </div>
         </ErrorBoundary>
