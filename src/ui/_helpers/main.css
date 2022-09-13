@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+body {
+  background-image: url("./images/background.png");
+}
+
 .container {
   font-family: "Roboto Light", sans-serif;
   display: flex;

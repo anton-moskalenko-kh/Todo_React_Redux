@@ -4,9 +4,10 @@ export const useStyle = createUseStyles({
     label: {
         "display": "flex",
         "justifyContent": "flex-start",
-        "borderBottom": "1px solid #cbc4c4",
+        "border": "1px solid #1976d2",
+        "borderRadius": "5px",
         "padding": "10px",
-        "margin": "0 0 10px 0"
+        "margin": "0 0 14px 0"
     },
     updateBlock: {
         "width": "100%",
