@@ -19,3 +19,9 @@ export const buttonStyle = {
     padding: '10px'
 }
 
+export const errorStyle = {
+    order: 1,
+    width: "100%",
+    margin: "5px 0 0 0",
+}
+

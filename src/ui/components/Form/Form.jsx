@@ -9,6 +9,7 @@ import Selectors from "../../../engine/core/todo/selectors";
 import Input from "./Input";
 import ItemButton from "../Button/Button";
 
+
 //Style
 import {useStyle, buttonStyle} from "./style"
 
@@ -18,17 +19,32 @@ function MainForm() {
     const items = useSelector(Selectors.memoItems)
     const classes = useStyle()
 
-    const handleItem = (event) => {
-        dispatch(addItem({id: v4(), description: event.description, items}))
-        event.description = ''
+    const handleItem = (values, form) => {
+        dispatch(addItem({id: v4(), description: values.description, items}))
+        // event.description = ''
+
+        Object.keys(values).forEach(key => {
+            form.change(key, undefined);
+            form.resetFieldState(key)
+        })
+    }
+
+    const minLengthField = (values) => {
+        const errors = {}
+        const valueLength = values.description || []
+        if (valueLength.length === 0) {
+            errors.description = "The field mustn't be empty"
+        }
+        return errors
     }
 
     return (
         <Form onSubmit={handleItem}
+              validate={minLengthField}
               render={(props) => {
-                  const {handleSubmit} = props
+                  const {handleSubmit, form} = props
                   return (
-                      <form onSubmit={handleSubmit} className={classes.form}>
+                      <form onSubmit={(values) => handleSubmit(values, form)} className={classes.form}>
                           <Field component={Input} className={classes.input} name='description'
                                  placeholder={'Enter your task'}/>
                           <ItemButton sx={{...buttonStyle}} text="Add task" varient='contained'/>
