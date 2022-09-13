@@ -21,7 +21,6 @@ function MainForm() {
 
     const handleItem = (values, form) => {
         dispatch(addItem({id: v4(), description: values.description, items}))
-        // event.description = ''
 
         Object.keys(values).forEach(key => {
             form.change(key, undefined);
